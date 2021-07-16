@@ -14,7 +14,7 @@ void NotSoNaive(char *x, int m, char *y, int n) {
   
    //Buscando padrao em textos
    j = 0;
-   while (j <= n - m)
+   while (j <= n - m)z
       if (x[1] != y[j + 1])
          j += k;
       else {
