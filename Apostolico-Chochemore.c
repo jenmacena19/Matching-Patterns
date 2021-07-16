@@ -1,10 +1,30 @@
 #include<stdio.h>
-#Define MAX 100
-//implementacao da fundao do algoritmo Crochemore
-void ApCrochemore(char *x, int m, char *y, int n) {
+#include<stdlib.h>
+#define MAX 10000
+
+//funcao auxiliar para o pre-processamento do texto
+void preKmp(char *x, int m, int kmpNext[]) {
+   int i, j;
+
+   i = 0;
+   j = kmpNext[0] = -1;
+   while (i < m) {
+      while (j > -1 && x[i] != x[j])
+         j = kmpNext[j];
+      i++;
+      j++;
+      if (x[i] == x[j])
+         kmpNext[i] = kmpNext[j];
+      else
+         kmpNext[i] = j;
+   }
+}
+
+//implementacao da fundao do algoritmo Crochemore 
+void ApCrochemore(char *x, int m, char *y, int n) { 
    //x e y são ponteiro que aponta para uma cadeia de caracteres (texto)
    int i, j, k, l, kmpNext[MAX];
-
+   
    // Pré-Processamento do texto chamando a a funcao do algoritmo Knuth-Morris-Pratt
    preKmp(x, m, kmpNext);
    for (l = 1; x[l - 1] == x[l]; l++){
@@ -12,7 +32,6 @@ void ApCrochemore(char *x, int m, char *y, int n) {
       l = 0;
       }
    }
-   
    //Buscando o padrão no texto
    i = l;
    j = 0;
@@ -23,15 +42,17 @@ void ApCrochemore(char *x, int m, char *y, int n) {
       if (i >= m) {
          while (k < l && x[k] == y[j + k])
             ++k;
-         if (k >= l)
-            OUTPUT(j);
+         if (k >= l){
+         	printf("%c", j);
+		 }
+    
       }
       j += (i - kmpNext[i]);
       if (i == l)
          k = MAX(0, k - 1);
       else
          if (kmpNext[i] <= l) {
-            k = MAX(0, kmpNext[i]);
+            k = 100(0, kmpNext[i]);
             i = l;
          }
          else {
@@ -40,3 +61,4 @@ void ApCrochemore(char *x, int m, char *y, int n) {
          }
    }
 }
+
