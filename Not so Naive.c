@@ -1,8 +1,8 @@
-//Função para o algoritmo Not So Naive
+//Funcao para o algoritmo Not So Naive
 void NotSoNaive(char *x, int m, char *y, int n) {
    int j, k, l;
   
-   //Pré=Processamento
+   //Pre Processamento
    if (x[0] == x[1]) {
       k = 2;
       l = 1;
@@ -12,12 +12,13 @@ void NotSoNaive(char *x, int m, char *y, int n) {
       l = 2;
    }
   
-   //Buscando padrão em textos
+   //Buscando padrao em textos
    j = 0;
    while (j <= n - m)
       if (x[1] != y[j + 1])
          j += k;
       else {
+         //utilizando a funcao memcpm... Referencia: https://www.cplusplus.com/reference/cstring/memcmp/
          if (memcmp(x + 2, y + j + 2, m - 2) == 0 &&
              x[0] == y[j])
             OUTPUT(j);
