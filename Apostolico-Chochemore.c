@@ -1,7 +1,9 @@
+#include<stdio.h>
+#Define MAX 100
 //implementacao da fundao do algoritmo Crochemore
 void ApCrochemore(char *x, int m, char *y, int n) {
    //x e y são ponteiro que aponta para uma cadeia de caracteres (texto)
-   int i, j, k, l, kmpNext[XSIZE];
+   int i, j, k, l, kmpNext[MAX];
 
    // Pré-Processamento do texto chamando a a funcao do algoritmo Knuth-Morris-Pratt
    preKmp(x, m, kmpNext);
@@ -13,7 +15,8 @@ void ApCrochemore(char *x, int m, char *y, int n) {
    
    //Buscando o padrão no texto
    i = l;
-   j = k = 0;
+   j = 0;
+   k = 0;
    while (j <= n - m) {
       while (i < m && x[i] == y[i + j])
          ++i;
